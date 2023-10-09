@@ -207,7 +207,6 @@ input[type="password"],
 .logIn__popup,
 .btn-primary,
 .withdrawal__btn,
-#header,
 .support__title-bar {
   background: v-bind(mainColorLocal) !important;
 }

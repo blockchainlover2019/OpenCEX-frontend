@@ -110,6 +110,7 @@ img {
 }
 .header__login-no-auth:hover {
   text-decoration: none;
+  background: gray;
 }
 @media screen and (max-width: 450px) {
   .header__login-no-auth {
@@ -117,6 +118,8 @@ img {
     -webkit-flex: 0 0 80px;
     -ms-flex: 0 0 80px;
     flex: 0 0 80px;
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 }
 .header__logo {

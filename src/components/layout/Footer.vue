@@ -7,7 +7,6 @@
             {{ new Date().getFullYear() }} ©
             {{ $t("common.copyright", { title: localConfig.project_title }) }}
           </div>
-          <div class="rights !mb-2">{{ $t("common.built_by") }}</div>
           <div class="rights">{{ $t("common.rights") }}</div>
           <div class="footer__socials-container">
             <a
@@ -123,10 +122,10 @@
             <router-link to="/trade/BTC-USDT">
               {{ $t("common.buysell") }}
             </router-link>
-            <router-link to="/quick-swap">
+            <router-link to="/">
               {{ $t("common.exchange") }}
             </router-link>
-            <router-link to="/wallet">
+            <router-link to="/">
               {{ $t("common.wallet") }}
             </router-link>
           </div>
@@ -137,7 +136,7 @@
             <a href="/account/support">
               {{ $t("common.customer_support") }}
             </a>
-            <router-link to="/fees">
+            <router-link to="/">
               {{ $t("common.feeslimits") }}
             </router-link>
             <a href="/account/settings">{{ $t("common.settings") }}</a>

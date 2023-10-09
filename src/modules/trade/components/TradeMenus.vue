@@ -1,122 +1,161 @@
 <template>
-  <div class="trade-menus" :class="{ 'trade-menus_blocked': !isAuthorized }">
-    <div v-if="!isAuthorized" class="trade-menus--tooltip-layer"></div>
-    <div>
-      <ul class="nav nav-tabs trade-menus__links" role="tablist">
-        <li class="nav-item trade-menus__nav-item">
-          <a
-            class="trade-menus__link nav-link"
-            :class="{ active: tab === 1 }"
-            @click="setTab(1)"
-          >
-            {{ $t("common.limit") }}
-          </a>
-        </li>
-        <li class="nav-item trade-menus__nav-item">
-          <a
-            class="trade-menus__link nav-link"
-            :class="{ active: tab === 2 }"
-            @click="setTab(2)"
-          >
-            {{ $t("common.stop_limit") }}
-          </a>
-        </li>
-        <li v-if="otcenabled" class="nav-item trade-menus__nav-item">
-          <a
-            class="trade-menus__link nav-link"
-            :class="{ active: tab === 3 }"
-            @click="setTab(3)"
-          >
-            {{ $t("common.automatic") }}
-          </a>
-        </li>
-      </ul>
+  <div>
+    <button
+      type="button"
+      class="connect-wallet-btn"
+      :class="{ 'wallet-disconnected': !isAuthorized }"
+    >
+      {{ $t("common.login") }}
+    </button>
+    <div class="trade-menus" :class="{ 'trade-menus_blocked': !isAuthorized }">
+      <div v-if="!isAuthorized" class="trade-menus--tooltip-layer"></div>
+      <div>
+        <ul class="nav nav-tabs trade-menus__links" role="tablist">
+          <li class="nav-item trade-menus__nav-item">
+            <a
+              class="trade-menus__link nav-link"
+              :class="{ active: tab === 1 }"
+              @click="setTab(1)"
+            >
+              {{ $t("common.limit") }}
+            </a>
+          </li>
+          <li class="nav-item trade-menus__nav-item">
+            <a
+              class="trade-menus__link nav-link"
+              :class="{ active: tab === 2 }"
+              @click="setTab(2)"
+            >
+              {{ $t("common.stop_limit") }}
+            </a>
+          </li>
+          <li v-if="otcenabled" class="nav-item trade-menus__nav-item">
+            <a
+              class="trade-menus__link nav-link"
+              :class="{ active: tab === 3 }"
+              @click="setTab(3)"
+            >
+              {{ $t("common.automatic") }}
+            </a>
+          </li>
+        </ul>
 
-      <div class="trade-menus__content tab-content">
-        <div
-          id="limit-list-1"
-          class="tab-pane fade show"
-          role="tabpanel"
-          :class="{ active: tab === 1 || !tab }"
-        >
-          <div class="xl:flex block">
-            <LimitList
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :disable-operations="disableOperations"
-              operation="buy"
-              @add-order="
-                addOrder('buy', $event.orderData, $event.type, $event.callback)
-              "
-            />
-            <LimitList
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :disable-operations="disableOperations"
-              operation="sell"
-              @add-order="
-                addOrder('sell', $event.orderData, $event.type, $event.callback)
-              "
-            />
+        <div class="trade-menus__content tab-content">
+          <div
+            id="limit-list-1"
+            class="tab-pane fade show"
+            role="tabpanel"
+            :class="{ active: tab === 1 || !tab }"
+          >
+            <div class="xl:flex block">
+              <LimitList
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :disable-operations="disableOperations"
+                operation="buy"
+                @add-order="
+                  addOrder(
+                    'buy',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+              <LimitList
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :disable-operations="disableOperations"
+                operation="sell"
+                @add-order="
+                  addOrder(
+                    'sell',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+            </div>
           </div>
-        </div>
-        <div
-          id="stop-limit-1"
-          class="tab-pane fade show"
-          :class="{ active: tab === 2 }"
-        >
-          <div class="xl:flex block">
-            <StopLimit
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :bitfinex-price="bitfinex.price"
-              operation="buy"
-              @add-order="
-                addOrder('buy', $event.orderData, $event.type, $event.callback)
-              "
-            />
-            <StopLimit
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :bitfinex-price="bitfinex.price"
-              operation="sell"
-              @add-order="
-                addOrder('sell', $event.orderData, $event.type, $event.callback)
-              "
-            />
+          <div
+            id="stop-limit-1"
+            class="tab-pane fade show"
+            :class="{ active: tab === 2 }"
+          >
+            <div class="xl:flex block">
+              <StopLimit
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :bitfinex-price="bitfinex.price"
+                operation="buy"
+                @add-order="
+                  addOrder(
+                    'buy',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+              <StopLimit
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :bitfinex-price="bitfinex.price"
+                operation="sell"
+                @add-order="
+                  addOrder(
+                    'sell',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+            </div>
           </div>
-        </div>
-        <div
-          v-if="otcenabled"
-          id="otc-1"
-          class="tab-pane fade"
-          :class="{ active: tab === 3 }"
-        >
-          <div class="xl:flex block">
-            <OTC
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :bitfinex-price="bitfinex.price"
-              operation="buy"
-              @add-order="
-                addOrder('buy', $event.orderData, $event.type, $event.callback)
-              "
-            />
-            <OTC
-              class="trade-menus__block"
-              :base-currency="baseCurrency"
-              :quote-currency="quoteCurrency"
-              :bitfinex-price="bitfinex.price"
-              operation="sell"
-              @add-order="
-                addOrder('sell', $event.orderData, $event.type, $event.callback)
-              "
-            />
+          <div
+            v-if="otcenabled"
+            id="otc-1"
+            class="tab-pane fade"
+            :class="{ active: tab === 3 }"
+          >
+            <div class="xl:flex block">
+              <OTC
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :bitfinex-price="bitfinex.price"
+                operation="buy"
+                @add-order="
+                  addOrder(
+                    'buy',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+              <OTC
+                class="trade-menus__block"
+                :base-currency="baseCurrency"
+                :quote-currency="quoteCurrency"
+                :bitfinex-price="bitfinex.price"
+                operation="sell"
+                @add-order="
+                  addOrder(
+                    'sell',
+                    $event.orderData,
+                    $event.type,
+                    $event.callback
+                  )
+                "
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -349,5 +388,31 @@ export default {
     height: 100%;
     z-index: 1;
   }
+}
+
+.connect-wallet-btn {
+  display: none;
+}
+.connect-wallet-btn.wallet-disconnected {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2b67ec99;
+  color: white;
+  font-weight: 600;
+  z-index: 100;
+  padding: 8px 30px;
+  border-radius: 20px;
+  border: 1px solid blue;
+}
+.connect-wallet-btn.wallet-disconnected:hover {
+  border: 1px solid white;
+}
+.connect-wallet-wrapper {
+}
+.trade-menus.trade-menus_blocked {
+  filter: blur(2px);
 }
 </style>

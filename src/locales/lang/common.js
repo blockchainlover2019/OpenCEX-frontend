@@ -1463,7 +1463,7 @@ const common = {
     wrongtoken: "Invalid token",
     internal_error:
       "Something went wrong. Please try again later or contact {link}",
-    login: "Login",
+    login: "Connect Wallet",
     notification: "Notification",
     wrong_2fa_code_multiple_times:
       "Wrong input 2fa code too many times. Please login again.",

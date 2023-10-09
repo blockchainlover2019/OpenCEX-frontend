@@ -175,7 +175,7 @@ export default {
   height: 59px;
   padding: 0;
   display: flex;
-  background-color: #d5f1e4;
+  background-color: #01502b;
   border-bottom: 1px solid #c4ded1;
   border-top: 1px solid #c4ded1;
 

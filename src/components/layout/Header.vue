@@ -11,11 +11,13 @@
     ]"
   >
     <div class="header__logo">
-      <a class="header__logo-link" href="/">
+      <a class="header__logo-link" href="https://shogun.movement-defi.xyz">
         <img
           width="135"
           :src="
-            localConfig.logo ? localConfig.logo : '/public/img/logo-white.svg'
+            localConfig.logo
+              ? localConfig.logo
+              : '/public/img/shogun_text_logo.png'
           "
         />
       </a>
@@ -80,11 +82,7 @@
         >
           {{ $t("common.deposit") }}
         </router-link>
-        <router-link
-          v-if="!isAuthorized"
-          to="/login"
-          class="header__login-no-auth"
-        >
+        <router-link v-if="!isAuthorized" to="/" class="header__login-no-auth">
           <div class="burger">
             <span class="burger__text">{{ $t("common.login") }}</span>
           </div>
@@ -212,7 +210,7 @@
           </ul>
         </div>
       </div>
-      <MenuComponent />
+      <!--<MenuComponent />-->
       <LanguageSelector />
       <div
         class="themeSelector"
@@ -241,7 +239,7 @@
 </template>
 
 <script>
-import MenuComponent from "~/components/layout/parts/Menu.vue";
+//import MenuComponent from "~/components/layout/parts/Menu.vue";
 import { mapGetters } from "vuex";
 import menuHelper from "~/mixins/menuHelper";
 import helpers from "~/mixins/helpers";
@@ -252,7 +250,7 @@ import { useCookies } from "vue3-cookies";
 
 export default {
   name: "HeaderComponent",
-  components: { LanguageSelector, MenuComponent },
+  components: { LanguageSelector /*, MenuComponent*/ },
   mixins: [menuHelper, handleLogout, helpers, getFixedDecimal],
   props: {
     routeName: {
